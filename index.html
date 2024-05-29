@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thai Restaurant Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+        .menu {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .logo {
+            max-width: 200px;
+            margin: 0 auto 20px;
+        }
+        .menu-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #d38435;
+            padding-bottom: 10px;
+        }
+        .menu-item img {
+            max-width: 100px;
+            margin-right: 20px;
+        }
+        .menu-item div {
+            flex-grow: 1;
+            text-align: left;
+        }
+        .menu-item h3 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+        .menu-item p {
+            margin: 5px 0;
+        }
+        .menu-item input {
+            width: 50px;
+            margin-right: 10px;
+        }
+        .menu-item .price {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .payment-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #671a1a;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin-top: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .total-price {
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #ede8e8;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function calculateTotal() {
+            const prices = [10.99, 12.99, 8.99]; // Example prices
+            let total = 0;
+            const quantities = document.querySelectorAll('.menu-item input');
+            quantities.forEach((input, index) => {
+                total += input.value * prices[index];
+            });
+            document.getElementById('totalPrice').innerText = 'Total: $' + total.toFixed(2);
+        }
+
+        function goToPayment() {
+            document.getElementById('paymentModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+    <div class="menu">
+        <img src="01.jpg" alt="Restaurant Logo" class="logo">
+        <img src="02.jpg" alt="Restaurant Logo" class="logo">
+        <h1>THAI FOOD MENU</h1>
+        <div class="menu-item">
+            <img src="somtum.jpg" alt="Food 1">
+            <div>
+                <h3>Som Tum (Spicy!)</h3>
+                <p>Som Tum Thai, often simply called "somtum," is a traditional Thai dish that is a popular street food and a staple in Thai cuisine.</p>
+                <input type="number" min="0" placeholder="0" oninput="calculateTotal()"> <label for="quantity">Qty</label>
+                <span class="price">$10.99</span>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="tomyum.jpg" alt="Food 2">
+            <div>
+                <h3>Tom Yum Kung</h3>
+                <p>Tom Yum Kung, often simply called Tom Yum, is a classic Thai soup known for its distinctive hot and sour flavors. </p>
+                <input type="number" min="0" placeholder="0" oninput="calculateTotal()"> <label for="quantity">Qty</label>
+                <span class="price">$12.99</span>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="padthai.jpg" alt="Food 3">
+            <div>
+                <h3>Pad-Thai</h3>
+                <p>Pad Thai is a popular Thai street food dish that is also enjoyed in restaurants around the world..</p>
+                <input type="number" min="0" placeholder="0" oninput="calculateTotal()"> <label for="quantity">Qty</label>
+                <span class="price">$8.99</span>
+            </div>
+        </div>
+        <div class="total-price" id="totalPrice">Total: $0.00</div>
+        <button class="payment-button" onclick="goToPayment()">Go to Payment</button>
+    </div>
+
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>Proceed to payment.</p>
+        </div>
+    </div>
+
+    <center>
+    <p> "Made with love by Patchara-anas" </p>
+    </center>
+</body>
+</html>
